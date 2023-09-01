@@ -3,6 +3,7 @@ import Navbar from './Components/Navbar';
 import TableComponent from './Components/Table';
 import StatusBadge from './Components/badge';
 import ChartComponent from './Components/Charts';
+import Form from "./Components/Form";
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
         <StatusBadge />
         <header style={{ marginBottom: '4%', marginTop: '2%', fontWeight: 'bold' }}>Task 2 : Basic data visualization</header>
         <ChartComponent />
+        <header style={{ marginBottom: '4%', marginTop: '2%', fontWeight: 'bold' }}>Task 3 : Create Accesible Form With Validations</header>
+        <Form />
       </div>
 
     </>
