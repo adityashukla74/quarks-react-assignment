@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   BarChart,
   Bar,
@@ -8,46 +8,47 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-
-const data = [
-  {
-    id: "0",
-    name: "Naruto",
-    location: "konoha",
-    health: "Healthy",
-    ip: "abcd",
-    volume: 1000000000 // in bytes
-  },
-  {
-    id: "1",
-    name: "Sasuke",
-    location: "Orochimaru Hidden Village",
-    health: "error",
-    ip: "abcd",
-    volume: 300000000 // in bytes
-  }
-];
+import CircularWithValueLabel from './Spinner';
 
 const ChartComponent = () => {
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); 
+
+  useEffect(() => {
+    fetch("https://api.npoint.io/8d0109c35278f342992a")
+      .then((response) => response.json())
+      .then((apiData) => {
+        setData(apiData);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setIsLoading(false);
+      });
+  }, []);
+
   return (
     <div>
-      <BarChart
-        width={500}
-        height={300}
-        data={data}
-        margin={{
-          left: 70,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis dataKey="volume" />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="volume" fill="#8884d8" />
-      </BarChart>
+      {isLoading ? ( // Render the spinner while loading is true
+        <CircularWithValueLabel />
+      ) : (
+        <BarChart
+          width={500}
+          height={300}
+          data={data}
+          margin={{
+            left: 70,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis dataKey="volume" />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="volume" fill="#8884d8" />
+        </BarChart>
+      )}
     </div>
-
   );
 };
 
