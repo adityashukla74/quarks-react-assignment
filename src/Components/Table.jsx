@@ -8,19 +8,19 @@ import {
   TableRow, 
   Paper,
 } from '@mui/material';
+import CircularWithValueLabel from './Spinner';
 
 function TableComponent() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch data from the API
     fetch('https://api.npoint.io/8d0109c35278f342992a', {
       method: 'GET',
       headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:3000', // Replace with your allowed origin or use '*' for any origin
+        'Access-Control-Allow-Origin': 'http://localhost:3000', 
       },
-      mode: 'cors', // Enable CORS
+      mode: 'cors', // This removes cors issue
     })
       .then((response) => response.json())
       .then((data) => {
@@ -54,7 +54,7 @@ function TableComponent() {
   );
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <CircularWithValueLabel />;;
   }
 
   return (

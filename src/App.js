@@ -1,4 +1,5 @@
 import './App.css';
+import React from 'react';
 import Navbar from './Components/Navbar';
 import TableComponent from './Components/Table';
 import StatusBadge from './Components/badge';
