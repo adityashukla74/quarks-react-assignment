@@ -1,0 +1,18 @@
+[
+  {
+    "id": "0",
+    "name": "Naruto",
+    "location": "Konoha",
+    "health": "Healthy",
+    "ip": "abcd",
+    "volume": 1000000000
+  },
+  {
+    "id": "1",
+    "name": "Sasuke",
+    "location": "Orochimaru Hidden Village",
+    "health": "Error",
+    "ip": "abcd",
+    "volume": 300000000
+  }
+]

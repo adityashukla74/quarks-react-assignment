@@ -61,7 +61,12 @@ const AppNameForm = () => {
         helperText={formik.touched.volumeNumber && formik.errors.volumeNumber}
       />
 
-      <Button type="submit" variant="contained" color="primary">
+      <Button 
+        type="submit" 
+        variant="contained"
+        color="primary"
+        style={{marginBottom: '40px', marginTop: '20px'}}
+      >
         Submit
       </Button>
     </form>

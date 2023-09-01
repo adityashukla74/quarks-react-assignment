@@ -4,6 +4,7 @@ import TableComponent from './Components/Table';
 import StatusBadge from './Components/badge';
 import ChartComponent from './Components/Charts';
 import Form from "./Components/Form";
+import Footer from './Components/Footer';
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
         <header style={{ marginBottom: '4%', marginTop: '2%', fontWeight: 'bold' }}>Task 3 : Create Accesible Form With Validations</header>
         <Form />
       </div>
-
+    <Footer/>
     </>
   );
 }

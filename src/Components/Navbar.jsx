@@ -17,7 +17,7 @@ function Navbar() {
     <AppBar position="static" style={navbarStyle}>
       <Toolbar>
         <Typography variant="h6" style={quarksNavbar}>
-          Quarks Assignment
+          Quarks Assignment By Aditya Shukla
         </Typography>
       </Toolbar>
     </AppBar>
