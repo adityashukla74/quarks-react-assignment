@@ -22,6 +22,7 @@ function TableComponent() {
   const itemsPerPage = 10; // Change this value as needed
 
   useEffect(() => {
+    // items with a 1000 items, not able to duplicate 10k records as browser is crashing!!!!
     fetch('https://api.npoint.io/ddd3b1d5c47816f77e9c', {
       method: 'GET',
       headers: {
