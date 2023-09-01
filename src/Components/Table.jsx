@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Table, 
   TableBody, 
@@ -6,14 +6,35 @@ import {
   TableContainer, 
   TableHead, 
   TableRow, 
-  Paper 
+  Paper,
 } from '@mui/material';
-import data from '../data.json';
 
 function TableComponent() {
-  const tableHeaders = Object.keys(data[0]);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // table header here ->
+  useEffect(() => {
+    // Fetch data from the API
+    fetch('https://api.npoint.io/8d0109c35278f342992a', {
+      method: 'GET',
+      headers: {
+        'Access-Control-Allow-Origin': 'http://localhost:3000', // Replace with your allowed origin or use '*' for any origin
+      },
+      mode: 'cors', // Enable CORS
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+        setLoading(false);
+      });
+  }, []);
+
+  const tableHeaders = data.length > 0 ? Object.keys(data[0]) : [];
+
   const renderTableHeader = () => (
     <TableRow>
       {tableHeaders.map((header) => (
@@ -22,7 +43,6 @@ function TableComponent() {
     </TableRow>
   );
 
-  // table rows here ->  
   const renderTableRows = () => (
     data.map((row) => (
       <TableRow key={row.id}>
@@ -32,8 +52,11 @@ function TableComponent() {
       </TableRow>
     ))
   );
-  
-  // rendering table from here ->
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
