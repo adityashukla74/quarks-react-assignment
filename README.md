@@ -1,7 +1,5 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 # Deployed on Website 
 
 This website is deployed on Vercel : - https://quarks-react-assignment.vercel.app/
