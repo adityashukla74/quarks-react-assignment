@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableContainer, 
-  TableHead, 
-  TableRow, 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
   Paper,
   TextField,
   Button,
+  Pagination,
 } from '@mui/material';
 import CircularWithValueLabel from './Spinner';
 
@@ -21,10 +22,10 @@ function TableComponent() {
   const itemsPerPage = 10; // Change this value as needed
 
   useEffect(() => {
-    fetch(' https://api.npoint.io/ddd3b1d5c47816f77e9c', {
+    fetch('https://api.npoint.io/ddd3b1d5c47816f77e9c', {
       method: 'GET',
       headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:3000', 
+        'Access-Control-Allow-Origin': 'http://localhost:3000',
       },
       mode: 'cors',
     })
@@ -78,6 +79,10 @@ function TableComponent() {
 
   const maxPage = Math.ceil(filteredData.length / itemsPerPage);
 
+  const handlePageChange = (event, newPage) => {
+    setCurrentPage(newPage);
+  };
+
   const renderTableHeader = () => (
     <TableRow>
       {tableHeaders.map((header) => (
@@ -105,19 +110,15 @@ function TableComponent() {
     ));
   };
 
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-  };
-
   if (loading) {
     return <CircularWithValueLabel />;
   }
 
   return (
     <div>
-      <TextField 
-        label='Filter table'
-        variant='outlined'
+      <TextField
+        label="Filter table"
+        variant="outlined"
         value={filterText}
         onChange={handleFilterChange}
         fullWidth
@@ -130,18 +131,15 @@ function TableComponent() {
         </Table>
       </TableContainer>
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-        <Button
-          disabled={currentPage === 1}
-          onClick={() => handlePageChange(currentPage - 1)}
-        >
-          Previous
-        </Button>
-        <Button
-          disabled={currentPage === maxPage}
-          onClick={() => handlePageChange(currentPage + 1)}
-        >
-          Next
-        </Button>
+        <Pagination
+          count={maxPage}
+          page={currentPage}
+          onChange={handlePageChange}
+          color="primary"
+          size="large"
+          siblingCount={1}
+          boundaryCount={1}
+        />
       </div>
     </div>
   );
