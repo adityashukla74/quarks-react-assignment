@@ -4,6 +4,7 @@ import * as yup from "yup";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
+// create yup object to stop schema for form validation
 const formValidationSchema = yup.object({
   appName: yup.string().required("App Name is required"),
   volumeNumber: yup
@@ -14,6 +15,7 @@ const formValidationSchema = yup.object({
 });
 
 const AppNameForm = () => {
+// initial form object
   const formik = useFormik({
     initialValues: {
       appName: "",
@@ -26,6 +28,7 @@ const AppNameForm = () => {
   });
 
   return (
+    // create form
     <form
       style={{ 
         width: '40%', 

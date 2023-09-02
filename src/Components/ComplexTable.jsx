@@ -26,9 +26,9 @@ function TableComponent() {
     fetch('https://api.npoint.io/ddd3b1d5c47816f77e9c', {
       method: 'GET',
       headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:3000',
+        'Access-Control-Allow-Origin': 'http://localhost:3000', //to allow cross origin for localhost
       },
-      mode: 'cors',
+      mode: 'cors', //removes cors issue
     })
       .then((response) => response.json())
       .then((data) => {
@@ -40,21 +40,27 @@ function TableComponent() {
         setLoading(false);
       });
   }, []);
-
+ // get keys from first object to create headers
   const tableHeaders = data.length > 0 ? Object.keys(data[0]) : [];
 
   const requestSort = (key) => {
     let direction = 'asc';
+    // check if the sorting config has the same key
     if (sortConfig.key === key && sortConfig.direction === 'asc') {
       direction = 'desc';
     }
+    // set new key and direction after changing
     setSortConfig({ key, direction });
   };
 
+  
   const sortedData = () => {
+    // take updated key, direction from sorting config obj
     const { key, direction } = sortConfig;
     if (key) {
+      // create a shallow copy 
       return [...data].sort((a, b) => {
+        // compare value of key in each obj 
         const aValue = a[key];
         const bValue = b[key];
         if (direction === 'asc') {
@@ -102,6 +108,7 @@ function TableComponent() {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
 
+    // select items for current page only
     return filteredData.slice(startIndex, endIndex).map((row) => (
       <TableRow key={row.id}>
         {tableHeaders.map((header) => (
